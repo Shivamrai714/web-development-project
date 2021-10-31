@@ -1,0 +1,276 @@
+.my{
+	padding: 10px;
+	background-color:red;
+	border: none;
+	border-radius: 20px;
+	color white;
+	cursor:pointer;
+}
+*{
+   
+    margin:0; padding:0;
+}
+
+#navbar{       
+    position: sticky;
+    height: 84px;
+display: flex;
+align-items:center;                         /*  vertiaclay centre*/  
+                           /*justify-content: center;                         /*   horizontall centre  */
+       /** position:relative withrespect to pseudo background*/
+                        }
+
+#navbar::before
+{                        /* pseudo selector to make bakcground */
+ 
+    content: "";
+    background-color: black;
+    position:absolute;
+    height:100%;
+    width:100%;
+z-index:-1;                           /* to make contenet visible above the background */
+ opacity:0.4;
+}
+
+
+#logo{
+    margin: 10px 35px;
+}
+
+#logo img{
+      height: 66px;
+margin: 12px 10px;
+}
+
+#navbar ul
+{
+ display:flex;                          /* makes content horizontal in a row*/
+ font-family: 'Baloo Bhai', cursive;        /*pasted link in the head bar of google fonts */
+
+
+}
+
+#navbar ul li
+{    font-size:1.2rem;
+    list-style: none;                /* removes dots from list elements */
+}
+
+#navbar ul li a
+{  color:white;                /* as we have made the background black by using pseudo selector */
+   display: block;
+   padding: 3px 22px;
+   border-radius: 10px;
+   text-decoration: none;      /* removes underline */
+}
+#navbar ul li a:hover{                 /* to highlight the bar tags*/
+    color:black;
+    background-color:white; 
+}
+
+.button a{
+    
+    text-decoration: none;
+}
+
+
+/*Section design */
+#home
+{  /*position:relative;
+   
+    height: 400px;  /* to adjust the content below navigation bar*/
+    height: 580px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 150px;
+
+}
+#home::before
+{content:"";
+    position:absolute;
+    background:url("img/bg1.jpg")no-repeat center center/cover;    /*to adjust teh img to centre */
+top:0;
+left:0;               /* to fix the background of home to top and then adjust teh height in bootom*/
+       height: 642px;
+width:100%;
+z-index:-1;
+opacity:0.9 ;
+}
+
+#home h1{
+   padding:20px;
+    color:white;
+    text-align: center;
+    font-size:2.2rem;
+    font-family: 'Bree Serif', serif;
+}
+
+#home p{
+    
+    font-family: 'Bree Serif', serif;
+    color:white;
+    text-align: center;
+    font-size:1rem;
+}
+
+
+.button{
+    padding: 16px 30px;
+    border: 2px solid white;
+    background-color: brown;
+    color:white;
+margin:67px;
+border-radius: 20px;
+cursor:pointer;
+font-size:1.5rem;
+}
+.button:hover{
+color:black;
+background-color:white; 
+}
+
+
+/*Services Section */
+ 
+#services{
+    
+margin:34px;
+display: flex;
+}
+
+#services .box{
+    background:rgb(248, 221, 221);
+    margin: 27px 49px;
+    border-radius: 20px;
+    border: 2px solid brown;
+    padding: 20px;
+}
+#services .box img{
+    display: block;
+    margin:auto;                 /* **********it only works when display ois block  ..to shift the img to center */
+    height: 160px;            
+}
+
+#services .box p{
+    font-size:1rem;padding:10px;
+    font-family: 'Bree Serif', serif;
+
+}
+
+/*Client Section */
+#client-section{
+    margin-top:10px; /* cant remove this ,because logos displaces*/
+     height:auto;
+}
+
+#client-section::before{          /*using the pseudo selectors to make background*/
+ 
+    content:"";
+    position: absolute;
+    background: url('img/bg.jpg');
+width:100%;
+height: 39%;
+z-index:-1;
+opacity: 0.6;
+
+}
+
+
+
+#clients{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#clients img{     
+    height:130px; 
+}
+
+.client-item{
+    padding:50px;
+ 
+}
+
+
+/* Contact Section*/
+#contact{
+    position: relative;
+}
+
+#contact::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height: 100%;
+    z-index:-1;
+    opacity: 0.7;
+    background: url('img/contact.jpg') no-repeat center center/cover; 
+}
+
+
+
+footer{
+    background-color: black;
+    color: white;
+    padding:7px 9px; 
+}
+
+
+#contact-box {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-top:30px ;
+    padding-bottom:30px ;
+}
+
+#contact-box form{
+    width:40%;
+}
+#contact-box label{
+    font-size: 1.4rem;
+    font-family: 'Bree Serif',serif;
+}
+
+#contact-box input,
+#contact-box textarea{
+    padding:10px ; border-radius: 10px;
+    font-size:1.3rem;
+    width:100%;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Utility classes*/
+.h-primary{
+    color:rgb(21, 22, 22)6, 24, 24)6, 24, 24)6, 24, 24);
+    font-size:2.3rem;  font-family: 'Bree Serif', serif;
+}
+
+.center{
+    text-align: center;
+}
+.h-secondary{
+    height: 500px; font-family: 'Bree Serif', serif;
+    color:rgb(11, 12, 11);
+    font-size:1.5rem;
+}
+
+.par{
+    height: 100px;
+}
