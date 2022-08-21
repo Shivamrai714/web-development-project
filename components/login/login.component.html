@@ -1,0 +1,75 @@
+<!-- Using the bootstrap attached to desing the page -->
+
+<div class="bootstrap-wrapper">
+
+<div class="container text-center ">
+
+<div class="card " style="margin-left: 150px;">
+            
+<div class="card-body mt" style="background-color: #d4f0d2; width:80%;">
+
+<div class="row ">
+
+<div class="col-md-8 offset-md-2">
+
+    <div class="container text-center mt">
+      
+        <img src="/assets/default.png" 
+        class="image-fluid design-image"
+        style="width: 100px;"
+        alt="No image">
+
+
+    </div>
+
+
+
+<h1 class="text-center">Login page here</h1>
+
+
+<!--  FORM    creating form already included the imports in app component.ts -->
+
+
+<form (ngSubmit)="onSubmit()">
+ <mat-form-field class="full-width" appearance="outline" >
+   <mat-label>UserName</mat-label>
+   <input 
+   [(ngModel)]="credentials.username"
+    required
+    name="username"
+   type="text" matInput  
+   />
+ </mat-form-field>
+
+ <mat-form-field class="full-width">
+    <mat-label>Password</mat-label>
+    <input 
+    [(ngModel)]="credentials.password"
+   name="password"
+    required
+    type="password" matInput  />
+  </mat-form-field>
+ 
+
+  <div class="container mt " style="margin-bottom:20px; ">
+    <button  type="submit" mat-raised-button color="primary">Submit</button>
+  
+    <button 
+    type="reset" 
+    mat-raised-button color="accent"
+    style="margin-left: 10px; ">Reset</button>    
+   </div>
+
+
+</form>
+
+
+{{credentials | json }}
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

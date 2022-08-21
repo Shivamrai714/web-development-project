@@ -1,0 +1,6 @@
+EMAIL api is backend code , using the spring boot and EMAIL gui is frontend code using the Angular . 
+
+How to start , run the emailapi in from springboot as springboot project . Update the project if build problems.
+Start the angular project emailgui from the vscode terminal , and use ng serve to start it at port 4200
+
+Now open browser  localhost:4200/    and make request to send email :localhost:4200/sendemail

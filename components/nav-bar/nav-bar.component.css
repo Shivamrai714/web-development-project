@@ -1,0 +1,5 @@
+/* To align content of this class to right side */
+
+.example-spacer{
+   flex: 1 1 auto ;      
+}

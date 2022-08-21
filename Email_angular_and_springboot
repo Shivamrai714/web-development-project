@@ -1,0 +1,332 @@
+//Adding the fucntionlaity of sending mail to corresponding email.
+
+Make a new Handler for the Email HAndling.
+ 
+
+ Keep that all the depecdecies should be included in pom.xml 
+ Then we need to recheck all the components are included form the javax.mail .    like messag, Tramsport ,session etc.
+
+
+
+ New Update is there , so secureapps option is not availabe , just enable the two factor authentication and set the password then genrate the radom password and then copy paste it here on java file where we have provided the email id, and this dynamic password.
+
+
+ Refer Code with durgesh Video of makeing a mail, and sending it useing the api.
+
+___________________________________________________________________________________
+
+******************************************   SENDING EMAIL  *******************************
+
+Basically making the project which has backend service from spring boot (emailapi )  and frontend from Angular .
+To run this project : run the email api as springboot application , and make request to angular at localhost://4200 port , then click email or fire email button to send email to destination address.
+
+
+
+
+ _________________________________________________________________________________
+::::::::::::::::::::::::::::::::
+
+ANGULAR 
+
+:::::::::::::::::::::::::::::::::::;;
+
+( CODE PROVIDED BY DURGESH IN DESCRIPTION OF VIDEO.)
+
+ ANGULAR : it follows the component bases architecture. 
+
+ Eg Single Component (Footer)
+   - HTML (template)
+   - Typescript (dynamic code , clicking buttons etc)
+   - Style  (css)
+   - Test
+
+
+SINCE WE ARE GOING TO MAP THE FRONTED OF ANGULAR WTIH PORT NO OF SPRING BOOT :8080 AND USED @CROSSORIGIN  , SO SPRINGBOOT PROJECT WILL NOT WORK NOW WITHOUT ANGULAR PORT locakhost:4200, 
+
+Made the seperate folder angular in drive, and go to website and run the commaonds to install the angular in current folder. (Refer video)
+
+ --> install the angular , then create the project using commands of ng create emailgui. also give permissions to Y for routing etc (refer ANgular in 1 video video)
+
+
+   To re run the project use. ( Ctrl + c to terminate )
+   -> ng serve
+
+   Now we can make our own componenets using 
+   -> ng g component home 
+
+
+-----> app.module.ts 
+    
+    this is typescript file (super parent of javascript) , whenever we need to use any component just first need to import its api here ,and declare its name in imports[].
+
+    When we create component using ng g component email : then its imports are automatically added here.
+
+Also need to provide Generated Services in provider[] , 
+
+
+
+
+----------------------------------
+    import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from "@angular/material/button";
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { EmailComponent } from './email/email.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { EmailService } from './service/email.service';
+import { HttpClientModule } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+
+,
+
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatFormFieldModule ,
+    MatInputModule,
+    FormsModule,
+    HttpClientModule,
+    MatProgressSpinnerModule
+
+  ],
+  providers: [MatSnackBar,EmailService],
+  bootstrap: [AppComponent]
+
+------------------------------------------
+
+* TO address a particular component we need to use its selector as tag in main file(app.component.html) file.
+
+----> app.component.html
+
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>
+
+
+router outlet is used to switch between various url provided.
+
+
+
+----> app.routing.module.ts
+
+Here we define the url to switch between as routes [] 
+
+{
+  path:"sendemail",
+  component:EmailComponent,
+  pathMatch:"full"
+}
+,
+{
+  path:'',
+  component:HomeComponent,
+  pathMatch:"full"
+}
+
+
+We can only access the component when we have created it.
+
+eg we have created the service, email etc  
+
+*********************************
+
+We have made the componenets Folder for placing user gererated componenets.
+
+eg home, navbar, email 
+
+
+What need to just go to project folder from terminal emailgui/  and genrate component useing 
+
+ng g component email. etc
+
+
+Each component has imp files like
+
+email.component.html  
+
+  --> to write html to be displayed , form, buttons etc
+
+  to map field with actual data :
+  use-->     name="messsage" [(ngModel)]="data.message"
+
+Also apply concepts of *ngIf [disabled] if want to hide/unhide components.
+
+
+email.component.css
+  --> to style the components by targesting their class
+
+email.component.ts  
+
+--> Here apply the concepts to make button/spinners as funtional.
+
+* taken a data object field to map values.
+
+
+data={
+  to:"",
+  subject:"",
+  message:""
+}
+
+* Need to pass extra services used, in constructor
+
+* give defination of method used in html  eg doSubmitForm()
+
+email.component.spec.ts  --not used this file till now.
+
+_____________________________________
+
+Similart we have home components
+
+in html file : href/routerLink can be used to redirect to other page.
+
+in ts file : we cnan give the implementation of onclick method. If use any external componenent like SnackBar etc, need to first import it in app.module.ts then need to pass it in contstuctor fun
+
+Then simply define the fucntion.
+
+
+____________________________________
+
+Similarly we have email.service component under service folder. Need to declare it in app.module.ts file and in  
+ providers: [MatSnackBar,EmailService],
+
+Here in ts file email.service.ts  
+
+
+CONNECTING THE ANGULAR WTIH SPRINGBOOT 
+
+give configuration to match the url of backend of Spring boot :
+
+Need to import the httpclient in app.module.js
+
+  private baseUrl:string="http://localhost:8080"    //spring boot port number 
+
+  Also in Springboot main project class:  use annoation @CrossOrigin to make this work.
+
+
+constructor(private http:HttpClient) { }
+
+sendEmail(data :any)
+{
+ return  this.http.post(`${this.baseUrl}/sendemail`,data);
+}
+
+//All the configuration of send mail is aleady provided in the email.componenet.ts file   in the subscribe method.
+
+this.email.sendEmail(this.data).subscribe(
+    
+  response=>{
+console.log(response);
+this.flag=false;
+
+this.snak.open("Sent Mail SuccessFully ","OK");
+
+  },
+  error=>{
+    console.log(error);
+    this.flag=false;
+    this.snak.open("Error ","Try Again");
+  }
+
+  )
+
+
+
+
+//Also in backend , we have made another class EmailResponse  to send the response in from of  token as json object. 
+
+
+______________________________________________________________________________________________________________
+
+
+
+VIDEO : 
+WORKING WITH THE ACTUAL PROJECT : 
+
+
+
+
+   Also to include the componets from Angular material like button etc : Follow process  :
+
+--  Gooogle the angular material website, then search for component (eg button , field , toggle)
+--  copy api ,  import  to the in app.module.js , and also put its name in imports[  ,    ,] .
+
+--   Now can use the html , css file of button to access it. 
+-- If any error comes like mat-button just import api for mat-button by same process as well.
+
+  eg directly add the code insdie button to work 
+  
+<button mat-raised-button color="primary">Send Email</button>
+
+  Adding functionlaity of snakebar , when button clicked.
+
+
+// href - reload the page , whereas routerlink make changes on current page(faster)
+
+  To enable the 
+  Send email button , replace the button by <a routerLink="/sendemail" >  ans enable (click="btnClick()" ..... Send Email button.
+
+For this purpose make the function in type script..
+
+Make the Email for design using import form, and fields inputs , and direclty use them .
+
+also name the field , 
+
+( Need to use the [(ngModel)] : if want to store change in data object , used to save data )
+
+To link the "name" : [(ngModel)]="data.to"   in the input field.
+
+
+//we can see the {{ data | json }} , reflected changes in mapped form fields.  
+
+
+______________________
+
+//create the service folder manually and go to that directory , using cd src/app/service
+
+and generate the service  component : ng g service email 
+
+Now we need to also add this class in app.module.ts usder the providers section : also if error comes just import it respective module missing .
+___
+Also enable the HttpClientModule in imports section.
+____
+
+Write the code of sending email to the beckedn in export class EmailService
+
+
+
+
+
+
+
+
+
+
+
+* Main background can be changed from  "style.css" in environments.
+____________________________________________________________________________
+
+Trail of above project (ANGULAR + SPRING BOOT) :
+
+Run the emailapi as springboot from std .
+Run the angular project from emailgui folder with command :   ng serve
+
+Open browser localhost:4200   to use both service together.
+
+All done:
+
+Internally the beckend sercie runs ans you can see the send success msg on springboot console.
+
+________________________________________________________________________
